@@ -20,6 +20,7 @@ def create_app(config_name='default'):
     """
     # TODO: Crear el objeto 'app'
 
+    app = Flask(__name__)
     
     # Cargar configuración
     app.config.from_object(config[config_name])
