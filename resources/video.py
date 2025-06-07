@@ -37,6 +37,15 @@ def abort_if_video_doesnt_exist(video_id):
         abort(404, message=f"No se encontró un video con el ID {video_id}")
     return video
 
+class VideoList(Resource):
+    @marshal_with(resource_fields)
+    def get(self):
+        """
+        Obtiene la lista de todos los videos
+        """
+        videos = VideoModel.query.all()
+        return videos
+
 class Video(Resource):
     """
     Recurso para gestionar videos individuales
