@@ -75,6 +75,14 @@ class Video(Resource):
             VideoModel: El video creado
         """
         # TODO
+        if VideoModel.query.filter_by(id=video_id).first():
+            abort(409, message=f"Ya existe un video con el ID {video_id}")
+
+        args = video_put_args.parse_args()
+        video = VideoModel(id=video_id, name=args['name'], views=args['views'], likes=args['likes'])
+        db.session.add(video)
+        db.session.commit()
+        return video
         pass
     
     @marshal_with(resource_fields)
